@@ -1,0 +1,8 @@
+.productsCon{
+    padding-top: 20px;
+    justify-content: center;
+}
+.mainGrid{
+    display: flex;
+    justify-content: center;
+}
