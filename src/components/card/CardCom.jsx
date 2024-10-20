@@ -14,11 +14,21 @@ import FavoriteIcon from "@mui/icons-material/Favorite";
 import ShareIcon from "@mui/icons-material/Share";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
-
+import { useDispatch } from 'react-redux';
 import AddShoppingCartIcon from "@mui/icons-material/AddShoppingCart";
+import { addToCart } from "../../actions/cartActions";
 
-export default function CardCom({ title, desc, image }) {
+export default function CardCom({product}) {
   const [isExpanded, setIsExpanded] = React.useState(false);
+
+console.log(product)
+  const dispatch = useDispatch();
+
+  const handleAddToCart = () => {
+    dispatch(addToCart(product));
+  };
+
+
   return (
     <Card sx={{ maxWidth: 345 }}>
       <CardHeader
@@ -32,10 +42,11 @@ export default function CardCom({ title, desc, image }) {
             <MoreVertIcon />
           </IconButton>
         }
-        title="Shrimp and Chorizo Paella"
+        title={product.title}
         subheader="September 14, 2016"
       />
-      <CardMedia component="img" height="194" image={image} alt="Paella dish" />
+      <CardMedia component="img" height="194" image={product.image} alt="Paella dish" />
+      
       <CardContent>
         <Typography
           variant="body2"
@@ -48,7 +59,7 @@ export default function CardCom({ title, desc, image }) {
           mb: 1
           }}
         >
-          {desc}
+          {product.description}
         </Typography>
       </CardContent>
       <CardActions disableSpacing>
@@ -56,7 +67,7 @@ export default function CardCom({ title, desc, image }) {
           <FavoriteIcon />
         </IconButton>
         <IconButton aria-label="share">
-          <AddShoppingCartIcon />
+          <AddShoppingCartIcon        onClick={handleAddToCart}/>
         </IconButton>
       </CardActions>
     </Card>

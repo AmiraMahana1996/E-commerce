@@ -45,7 +45,7 @@ export default function HomeCom() {
   }, []);
   return (
     <>
-      <TopMenu />
+
       {/* Error Display */}
       {error && (
         <div className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded mb-4">
@@ -64,19 +64,21 @@ export default function HomeCom() {
             columns={{ xs: 4, sm: 8, md: 12 }}
             sx={{ flexGrow: 1 }}
           >
+            
             {products.map((product) => (
               <Grid size={4}>
                 <Item>
                   {" "}
                   <CardCom
                     key={product.id}
-                    title={product.title}
-                    desc={product.description}
-                    image={product.image}
+                    product={product}
+               
                   />
                 </Item>
               </Grid>
             ))}
+
+
           </Grid>
         </Box>
       </div>
