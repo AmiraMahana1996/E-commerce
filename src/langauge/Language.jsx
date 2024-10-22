@@ -4,6 +4,7 @@ import SearchIcon from "@mui/icons-material/Search";
 import "./style.css";
 import axios from "axios";
 import { AppBlockingSharp } from "@mui/icons-material";
+import TopMenu from "../components/header/TopMenu";
 
 export default function Language() {
   const [searchTerm, setSearchTerm] = useState("");
@@ -36,6 +37,8 @@ export default function Language() {
   
   return (
     <>
+ <TopMenu />
+
       <div className="container_Search">
         <Input
           placeholder="Search..."

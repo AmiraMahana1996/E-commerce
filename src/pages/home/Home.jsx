@@ -7,6 +7,7 @@ import axios from "axios";
 import { Box, Grid } from "@mui/joy";
 import "./homeStyle.css";
 const API_BASE_URL = "https://fakestoreapi.com"; //  API endpoint
+
 export default function HomeCom() {
   const [products, setproducts] = useState([]);
   const [loading, setLoading] = useState(false);
@@ -45,7 +46,7 @@ export default function HomeCom() {
   }, []);
   return (
     <>
-
+ <TopMenu />
       {/* Error Display */}
       {error && (
         <div className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded mb-4">

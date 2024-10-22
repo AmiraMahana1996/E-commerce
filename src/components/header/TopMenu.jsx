@@ -24,7 +24,7 @@ const TopMenu = () => {
     { label: "Langauge", href: "/language" },
     { label: "Services", href: "/cart" },
     { label: "About", href: "#" },
-    { label: "Contact", href: "#" },
+    { label: "Cms", href: "/cms/home" },
   ];
 
   const handleDrawerToggle = () => {
@@ -89,7 +89,7 @@ const TopMenu = () => {
             </ListItem>
           ))}
         </List>
-     <Cart/>
+     {/* <Cart/> */}
         {/* Mobile Menu Button */}
         <IconButton
           variant="outlined"
