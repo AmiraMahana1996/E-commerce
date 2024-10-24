@@ -24,7 +24,7 @@ const TopMenu = () => {
     { label: "Langauge", href: "/language" },
     { label: "Services", href: "/cart" },
     { label: "About", href: "#" },
-    { label: "Cms", href: "/cms/home" },
+    { label: "Cms", href: "/cms/land" },
   ];
 
   const handleDrawerToggle = () => {

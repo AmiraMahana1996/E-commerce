@@ -10,6 +10,11 @@ import Language from "./langauge/Language";
 
 import { Cart } from "./components/cart/Cart";
 import CMSHome from "./cms/pages/home/Home";
+import LanguageDetails from "./cms/components/languageDetails/LanguageDetails";
+import Land from "./cms/components/land/Land";
+import LessonDetails from "./cms/components/LessonDetails/LessonDetails";
+import AllLessons from "./cms/components/AllLessons/AllLessons";
+
 const store = configureStore({
   reducer: {
     cart: cartReducer,
@@ -18,18 +23,50 @@ const store = configureStore({
 function App() {
   return (
     <Provider store={store}>
- 
-    <Router>
-      <Routes>
-    
-        {/* Your routes will go here */}
-        <Route path="/" element={<HomeCom />} />
-        <Route path="/language" element={<Language />} />
-        <Route path="/cart" element={<Cart />} />
-        <Route path="/cms/home" element={<CMSHome />} />
-       
-      </Routes>
-    </Router>
+      <Router>
+        <Routes>
+          {/* Your routes will go here */}
+          <Route path="/" element={<HomeCom />} />
+          <Route path="/language" element={<Language />} />
+          <Route path="/cart" element={<Cart />} />
+
+          <Route
+            path="/cms/langdetails/:id"
+            element={
+              <CMSHome>
+                <LanguageDetails />
+              </CMSHome>
+            }
+          />
+
+          <Route
+            path="/cms/land"
+            element={
+              <CMSHome>
+                <Land />
+              </CMSHome>
+            }
+          />
+
+          <Route
+            path="/cms/lessonDetails/:languageid/:levelid/:lessonid"
+            element={
+              <CMSHome>
+                <LessonDetails />
+              </CMSHome>
+            }
+          />
+
+          <Route
+            path="/cms/alllessons/:languageid/:levelid/"
+            element={
+              <CMSHome>
+                <AllLessons />
+              </CMSHome>
+            }
+          />
+        </Routes>
+      </Router>
     </Provider>
   );
 }

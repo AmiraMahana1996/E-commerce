@@ -25,23 +25,24 @@ import Stack from "@mui/joy/Stack";
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import CardCMS from "../card/CardCMS";
+import CardHeader from "@mui/material/CardHeader";
+import Avatar from "@mui/material/Avatar";
+import IconButton from "@mui/material/IconButton";
+import { red } from "@mui/material/colors";
+import MoreVertIcon from "@mui/icons-material/MoreVert";
+import FavoriteIcon from "@mui/icons-material/Favorite";
+import CardActions from "@mui/material/CardActions";
+import AddShoppingCartIcon from "@mui/icons-material/AddShoppingCart";
+import CardMedia from "@mui/material/CardMedia";
+import { useLocation } from "react-router-dom";
 const Land = () => {
   const [open, setOpen] = React.useState(false);
+  const [openLevelForm, setopenLevelForm] = React.useState({status:false,id:''});
   const [formData, setFormData] = useState({ title: "" });
   const [data, setData] = useState([]);
-
-  const Item = styled(Sheet)(({ theme }) => ({
-    backgroundColor: "#fff",
-    ...theme.typography["body-sm"],
-    padding: theme.spacing(1),
-    textAlign: "center",
-    borderRadius: 4,
-    color: theme.vars.palette.text.secondary,
-    ...theme.applyStyles("dark", {
-      backgroundColor: theme.palette.background.level1,
-    }),
-  }));
-
+  const location = useLocation();
+  const path = location.pathname.split("/");
+  console.log(path)
   // GET Request - Fetch all Products
   const fetchProducts = async () => {
     try {
@@ -65,10 +66,28 @@ const Land = () => {
     await axios.post("http://localhost:5000/api/language/add", formData);
     console.log(open, "oppen");
   };
+
+  const handleSubmitLevel = async (event) => {
+    event.preventDefault();
+    setopenLevelForm({status:false});
+  
+    await axios.put(`http://localhost:5000/api/language/addleveltitle/${openLevelForm.id}`, formData);
+    console.log(formData,"formData")
+    console.log(open, "oppen");
+  };
   const handelChange = (e) => {
     const { title, value } = e.target;
-    console.log(title, value);
-    console.log(open, "oppen");
+
+    setFormData((prevFormData) => ({
+      ...prevFormData,
+      title: value,
+    }));
+  };
+
+  const handelChangeLevel = (e) => {
+    console.log(openLevelForm,"openLevelForm")
+    const { title, value } = e.target;
+
     setFormData((prevFormData) => ({
       ...prevFormData,
       title: value,
@@ -90,7 +109,14 @@ const Land = () => {
         </Menu>
       </Dropdown>
 
-      <Box sx={{ flexGrow: 1, p: 2, bgcolor: "background.surface" }}>
+      <Box
+        sx={{
+          flexGrow: 1,
+          p: 2,
+          bgcolor: "background.surface",
+          padding: "30px",
+        }}
+      >
         <Grid
           className="mainGrid"
           container
@@ -98,13 +124,38 @@ const Land = () => {
           columns={{ xs: 4, sm: 8, md: 12 }}
           sx={{ flexGrow: 1 }}
         >
-          {data.map((item,index) => (
-            <Grid size={4}  key={index}>
-              <Item>
-                {" "}
-                <CardCMS  item={item} />
-              </Item>
-            </Grid>
+          {data.map((item, index) => (
+            <Card sx={{ maxWidth: 345 }}>
+              <CardMedia
+                sx={{ height: 140 }}
+                image="/deutsch.jpg"
+                title="green iguana"
+              />
+              <CardContent>
+                <Typography gutterBottom variant="h5" component="div">
+                  {item.title}
+                </Typography>
+                <Typography variant="body2" sx={{ color: "text.secondary" }}>
+                  Lizards are a widespread group of squamate reptiles, with over
+                  6,000 species, ranging across all continents except Antarctica
+                </Typography>
+              </CardContent>
+              <CardActions>
+                <a href={`/cms/langdetails/${item._id}`}>
+                  <Button size="small" sx={{ padding: "10px 15px" }}>
+                    Learn More
+                  </Button>
+                </a>
+
+                <Button
+                  size="small"
+                  sx={{ padding: "10px 15px" }}
+                  onClick={() => setopenLevelForm({status:true,id:item._id})}
+                >
+                  Add Level
+                </Button>
+              </CardActions>
+            </Card>
           ))}
         </Grid>
       </Box>
@@ -126,6 +177,32 @@ const Land = () => {
                   value={formData.title}
                   autoFocus
                   placeholder="Title"
+                />
+              </FormControl>
+
+              <Button type="submit">Submit</Button>
+            </Stack>
+          </form>
+        </ModalDialog>
+      </Modal>
+
+      <Modal open={openLevelForm.status} onClose={() => setopenLevelForm({status:false})}>
+        <ModalDialog>
+          <DialogTitle>Create new Level</DialogTitle>
+          <DialogContent>
+            Fill in the information of the language.
+          </DialogContent>
+          <form onSubmit={handleSubmitLevel}>
+            <Stack spacing={2}>
+              <FormControl>
+                <FormLabel>Name</FormLabel>
+                <Input
+                  name="title"
+                  type="text"
+                  onChange={handelChangeLevel}
+                  value={formData.title}
+                  autoFocus
+                  placeholder="Level"
                 />
               </FormControl>
 

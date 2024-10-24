@@ -19,10 +19,10 @@ import AddShoppingCartIcon from "@mui/icons-material/AddShoppingCart";
 
 
 export default function CardCMS({ item }) {
-  const [isExpanded, setIsExpanded] = React.useState(false);
+ 
 
 
-console.log(item.title)
+
 
 
   return (
