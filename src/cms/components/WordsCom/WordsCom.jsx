@@ -1,55 +1,73 @@
-import { AspectRatio, Box, Card, CardContent, Chip, Divider, Menu, MenuButton, Modal, Option, Select, Sheet, Typography } from '@mui/joy'
-import { Button, DialogContent, DialogTitle, Dropdown, FormControl, FormLabel, Input, MenuItem, ModalDialog, Stack } from '@mui/joy'
-import axios from 'axios';
-import React, { useEffect, useState } from 'react'
-import LocationOnIcon from '@mui/icons-material/LocationOn';
-import BookmarkIcon from '@mui/icons-material/Bookmark';
-import EmailIcon from '@mui/icons-material/Email';
-import IconButton from '@mui/joy/IconButton';
-import { Search, VolumeUp } from '@mui/icons-material';
+import {
+  AspectRatio,
+  Box,
+  Card,
+  CardContent,
+  Chip,
+  Divider,
+  Menu,
+  MenuButton,
+  Modal,
+  Option,
+  Select,
+  Sheet,
+  Typography,
+} from "@mui/joy";
+import {
+  Button,
+  DialogContent,
+  DialogTitle,
+  Dropdown,
+  FormControl,
+  FormLabel,
+  Input,
+  MenuItem,
+  ModalDialog,
+  Stack,
+} from "@mui/joy";
+import axios from "axios";
+import React, { useEffect, useState } from "react";
+import LocationOnIcon from "@mui/icons-material/LocationOn";
+import BookmarkIcon from "@mui/icons-material/Bookmark";
+import EmailIcon from "@mui/icons-material/Email";
+import IconButton from "@mui/joy/IconButton";
+import { Search, VolumeUp } from "@mui/icons-material";
 
 export default function WordsCom({ lessonid, levelidd, languageid }) {
   const [open, setOpen] = React.useState({ status: false, levelid: "" });
   const [data, setData] = useState([]);
+  const [gramatik, setGramatik] = useState([]);
   const [formData, setFormData] = useState({
     word: "",
     translation: "",
     phrase: "",
   });
 
-
- 
   // GET Request - Fetch all Products
   const fetchProducts = async () => {
     try {
       const response = await axios.get(
         `http://localhost:5000/api/language/language`
       );
-      console.log(response.data);
-      const filteredArray = response.data.filter(
-        (obj) => {
+      console.log(response.data, "response.data");
+      const filteredArray = response.data.filter((obj) => {
+        console.log(obj._id === languageid);
+        return obj._id === languageid;
+      });
+      console.log(filteredArray[0].levels);
+      const filteredlevel = filteredArray[0].levels.filter((obj) => {
+        console.log(obj._id === levelidd);
+        return obj._id === levelidd;
+      });
 
-          console.log(obj._id === languageid)
-          return obj._id === languageid
-        }
-      );
-      console.log(filteredArray[0].levels)
-      const filteredlevel = filteredArray[0].levels.filter(
-        (obj) => {
-          console.log(obj._id === levelidd)
-          return obj._id === levelidd
-        }
-      );
-
-      const filteredlessons = filteredlevel[0].lessons.filter(
-        (obj) => {
-          console.log(obj._id === lessonid)
-          return obj._id === lessonid
-        }
-      );
-      setData(filteredlessons[0].gramatik);
-
-    } catch (err) { }
+      const filteredlessons = filteredlevel[0].lessons.filter((obj) => {
+        console.log(obj._id === lessonid);
+        return obj._id === lessonid;
+      });
+      console.log(filteredlessons[0].words, "filteredlessons[0].words");
+      setData(filteredlessons[0].words);
+      // setGramatik(filteredlessons[0].gramatik);
+    } catch (err) {}
   };
 
   // Load posts when component mounts
@@ -83,7 +101,6 @@ export default function WordsCom({ lessonid, levelidd, languageid }) {
         // Handle other fields
         break;
     }
-
   };
 
   const handleSubmit = async (event) => {
@@ -99,23 +116,24 @@ export default function WordsCom({ lessonid, levelidd, languageid }) {
 
   return (
     <>
-      <Dropdown sx={{ 
-            display: 'flex', 
-            justifyContent: 'flex-end',
-            gap: 1,
-            mt: 2 
-          }}>
+      <Dropdown
+        sx={{
+          display: "flex",
+          justifyContent: "flex-end",
+          gap: 1,
+          mt: 2,
+        }}
+      >
         <MenuButton
           variant="solid"
           color="primary"
-          
           onClick={() => setOpen({ status: true })}
         >
           Add Word
         </MenuButton>
-
       </Dropdown>
-      <Box sx={{ maxWidth: 800, margin: 'auto', p: 2 }}>
+
+      <Box sx={{ maxWidth: 800, margin: "auto", p: 2 }}>
         <Typography level="h4" sx={{ mb: 4 }}>
           Vocabulary List
         </Typography>
@@ -124,47 +142,53 @@ export default function WordsCom({ lessonid, levelidd, languageid }) {
         <br />
 
         {/* Words List */}
-        <Box sx={{ display: 'flex', flexDirection: 'column', gap: 2 }}>
+        <Box sx={{ display: "flex", flexDirection: "column", gap: 2 }}>
           {data.map((wordItem) => (
             <Card
               key={wordItem._id}
               variant="outlined"
               sx={{
-                '&:hover': { borderColor: 'primary.500', boxShadow: 'sm' },
+                "&:hover": { borderColor: "primary.500", boxShadow: "sm" },
               }}
             >
-              <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start' }}>
+              <Box
+                sx={{
+                  display: "flex",
+                  justifyContent: "space-between",
+                  alignItems: "flex-start",
+                }}
+              >
                 <Box>
-                  <Box sx={{ display: 'flex', alignItems: 'center', gap: 1, mb: 1 }}>
-                    <Typography level="h4">
-                      {wordItem.word}
-                    </Typography>
+                  <Box
+                    sx={{
+                      display: "flex",
+                      alignItems: "center",
+                      gap: 1,
+                      mb: 1,
+                    }}
+                  >
+                    <Typography level="h4">{wordItem.word}</Typography>
                     <IconButton
                       size="sm"
                       variant="plain"
                       color="neutral"
-                    // onClick={() => handlePlaySound(wordItem.word)}
+                      // onClick={() => handlePlaySound(wordItem.word)}
                     >
                       <VolumeUp />
                     </IconButton>
                   </Box>
-                  <Typography level="body-md" sx={{ color: 'text.secondary' }}>
+                  <Typography level="body-md" sx={{ color: "text.secondary" }}>
                     {wordItem.translation}
                   </Typography>
                 </Box>
-
               </Box>
 
               <Divider sx={{ my: 1.5 }} />
 
-              <Box sx={{ display: 'flex', flexDirection: 'column', gap: 1 }}>
-                <Typography
-                  level="body-sm"
-                  sx={{ fontStyle: 'italic' }}
-                >
+              <Box sx={{ display: "flex", flexDirection: "column", gap: 1 }}>
+                <Typography level="body-sm" sx={{ fontStyle: "italic" }}>
                   {wordItem.phrase}
                 </Typography>
-
               </Box>
             </Card>
           ))}
@@ -176,24 +200,20 @@ export default function WordsCom({ lessonid, levelidd, languageid }) {
             color="neutral"
             sx={{
               p: 4,
-              borderRadius: 'sm',
-              display: 'flex',
-              justifyContent: 'center',
-              alignItems: 'center',
+              borderRadius: "sm",
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
             }}
           >
-            <Typography level="body-lg">
-              No words found
-            </Typography>
+            <Typography level="body-lg">No words found</Typography>
           </Sheet>
         )}
       </Box>
       <Modal open={open.status} onClose={() => setOpen({ status: false })}>
         <ModalDialog>
           <DialogTitle>Add new Word</DialogTitle>
-          <DialogContent>
-            Fill in the information of the Word.
-          </DialogContent>
+          <DialogContent>Fill in the information of the Word.</DialogContent>
           <form onSubmit={handleSubmit}>
             <Stack spacing={2}>
               <FormControl>
@@ -238,5 +258,5 @@ export default function WordsCom({ lessonid, levelidd, languageid }) {
         </ModalDialog>
       </Modal>
     </>
-  )
+  );
 }

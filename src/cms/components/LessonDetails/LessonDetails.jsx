@@ -1,20 +1,20 @@
-import React from 'react'
-import { Tabs, TabList, Tab, TabPanel, Typography, Card } from '@mui/joy';
-import { Home, Person, Settings } from '@mui/icons-material';
-import WordsCom from '../WordsCom/WordsCom';
-import { useLocation } from 'react-router-dom';
-import Gramatik from '../gramatik/Gramatik';
+import React from "react";
+import { Tabs, TabList, Tab, TabPanel, Typography, Card } from "@mui/joy";
+import { Home, Person, Settings } from "@mui/icons-material";
+import WordsCom from "../WordsCom/WordsCom";
+import { useLocation } from "react-router-dom";
+import Gramatik from "../gramatik/Gramatik";
+import Conversation from "../conversation/Conversation";
+import Paragraph from "../Paragraph/Paragraph";
+import Verbs from "../verbs/Verbs";
 export default function LessonDetails() {
   const [iconTab, setIconTab] = React.useState(0);
   const location = useLocation();
 
-
   const path = location.pathname.split("/");
-  const languageid = path[3]
-  const levelid = path[4]
-  const lessonid = path[5]
-
-
+  const languageid = path[3];
+  const levelid = path[4];
+  const lessonid = path[5];
 
   return (
     <>
@@ -39,30 +39,73 @@ export default function LessonDetails() {
             </Tab>
             <Tab>
               <Person className="mr-2 h-4 w-4" />
-              Profile
+              Transcript
+            </Tab>
+            <Tab>
+              <Person className="mr-2 h-4 w-4" />
+              Verbs
+            </Tab>
+
+            <Tab>
+              <Person className="mr-2 h-4 w-4" />
+              Paragraph
             </Tab>
           </TabList>
           <TabPanel value={0}>
             <div className="p-4">
               <Typography>
-                <WordsCom lessonid={lessonid} levelidd={levelid} languageid={languageid} />
+                <WordsCom
+                  lessonid={lessonid}
+                  levelidd={levelid}
+                  languageid={languageid}
+                />
               </Typography>
             </div>
           </TabPanel>
           <TabPanel value={1}>
             <div className="p-4">
               <Typography>
-                <Gramatik  lessonid={lessonid} levelidd={levelid} languageid={languageid}/>
+                <Gramatik
+                  lessonid={lessonid}
+                  levelidd={levelid}
+                  languageid={languageid}
+                />
               </Typography>
             </div>
           </TabPanel>
           <TabPanel value={2}>
             <div className="p-4">
-              <Typography>Profile content goes here</Typography>
+              <Typography>
+                <Conversation  lessonid={lessonid}
+                  levelidd={levelid}
+                  languageid={languageid} />
+              </Typography>
+            </div>
+          </TabPanel>
+          <TabPanel value={3}>
+            <div className="p-4">
+              <Typography>
+                <Verbs
+                  lessonid={lessonid}
+                  levelidd={levelid}
+                  languageid={languageid}
+                />
+              </Typography>
+            </div>
+          </TabPanel>
+          <TabPanel value={4}>
+            <div className="p-4">
+              <Typography>
+                <Paragraph
+                  lessonid={lessonid}
+                  levelidd={levelid}
+                  languageid={languageid}
+                />
+              </Typography>
             </div>
           </TabPanel>
         </Tabs>
       </Card>
     </>
-  )
+  );
 }

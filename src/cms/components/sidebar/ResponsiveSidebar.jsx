@@ -12,6 +12,10 @@ import {
   Avatar,
   IconButton,
   Drawer,
+  Dropdown,
+  MenuButton,
+  Menu,
+  MenuItem,
 } from '@mui/joy';
 
 // Import icons
@@ -29,7 +33,7 @@ const DRAWER_WIDTH = 280;
 // Custom hook for handling responsive behavior
 const useResponsive = () => {
   const [isDesktop, setIsDesktop] = React.useState(window.innerWidth >= 900);
-
+  const [open, setOpen] = React.useState(false);
   React.useEffect(() => {
     const handleResize = () => {
       setIsDesktop(window.innerWidth >= 900);
@@ -48,9 +52,13 @@ const ResponsiveSidebar = () => {
   const isDesktop = useResponsive();
 
   const mainMenuItems = [
-    { text: 'Language', icon: <HomeRoundedIcon /> },
-    { text: 'Analytics', icon: <AnalyticsRoundedIcon /> },
-    { text: 'Team', icon: <PeopleRoundedIcon /> },
+    { text: 'Language', icon: <HomeRoundedIcon />,link:"/cms/land" },
+    { text: 'Financial', icon: <AnalyticsRoundedIcon /> ,link:"/cms/finance"},
+    { text: 'Marketing', icon: <PeopleRoundedIcon /> ,link:"/cms/marketing"},
+    { text: 'Learning Technical', icon: <PeopleRoundedIcon /> ,link:"/cms/learning"},
+    { text: 'Health', icon: <PeopleRoundedIcon /> ,link:"/cms/health"},
+    { text: 'Medical', icon: <PeopleRoundedIcon /> ,link:"/cms/medical"},
+    { text: 'Other', icon: <PeopleRoundedIcon /> ,link:"/cms/marketing"},
   ];
 
   const secondaryMenuItems = [
@@ -144,13 +152,14 @@ const ResponsiveSidebar = () => {
                 {item.icon}
               </ListItemDecorator>
               <ListItemContent>
-                <Typography>{item.text}</Typography>
+                <Typography><a href={item.link}>{item.text}</a></Typography>
               </ListItemContent>
             </ListItemButton>
           </ListItem>
         ))}
+          
       </List>
-
+   
       <Divider sx={{ my: 2 }} />
 
       {/* Secondary Menu */}
@@ -161,6 +170,7 @@ const ResponsiveSidebar = () => {
           px: 2,
         }}
       >
+      
         {secondaryMenuItems.map((item) => (
           <ListItem key={item.text}>
             <ListItemButton
@@ -175,12 +185,13 @@ const ResponsiveSidebar = () => {
               <ListItemDecorator>{item.icon}</ListItemDecorator>
               <ListItemContent>
                 <Typography>{item.text}</Typography>
+            
               </ListItemContent>
             </ListItemButton>
           </ListItem>
         ))}
       </List>
-
+    
       {/* Logout Button */}
       <Box sx={{ p: 2, mt: 'auto' }}>
         <ListItemButton

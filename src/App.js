@@ -14,6 +14,8 @@ import LanguageDetails from "./cms/components/languageDetails/LanguageDetails";
 import Land from "./cms/components/land/Land";
 import LessonDetails from "./cms/components/LessonDetails/LessonDetails";
 import AllLessons from "./cms/components/AllLessons/AllLessons";
+import Finance from "./cms/components/finance/Finance";
+import Marketing from "./cms/components/marketing/Marketing";
 
 const store = configureStore({
   reducer: {
@@ -62,6 +64,23 @@ function App() {
             element={
               <CMSHome>
                 <AllLessons />
+              </CMSHome>
+            }
+          />
+
+          <Route
+            path="/cms/finance"
+            element={
+              <CMSHome>
+                <Finance />
+              </CMSHome>
+            }
+          />
+          <Route
+            path="/cms/marketing"
+            element={
+              <CMSHome>
+                <Marketing />
               </CMSHome>
             }
           />

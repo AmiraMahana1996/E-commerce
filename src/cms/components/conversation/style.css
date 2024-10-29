@@ -1,0 +1,16 @@
+.person{
+    font-weight: 600;
+    font-size: 16px;;
+    color: red;
+}
+
+.persontext{
+    font-size: 14px;
+    font-weight: bold;
+}
+.persont{
+    font-weight: 600;
+    font-size: 21px;;
+
+    color: rgb(34, 0, 255);
+}
