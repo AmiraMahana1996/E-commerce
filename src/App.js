@@ -16,6 +16,10 @@ import LessonDetails from "./cms/components/LessonDetails/LessonDetails";
 import AllLessons from "./cms/components/AllLessons/AllLessons";
 import Finance from "./cms/components/finance/Finance";
 import Marketing from "./cms/components/marketing/Marketing";
+import LearningLand from "./cms/components/learning/learningLand/LearningLand";
+import LearningDetails from "./cms/components/learning/learningDetails/LearningDetails";
+import TopicDetails from "./cms/components/learning/topicDetails/TopicDetails";
+import SubtopicDetails from "./cms/components/learning/subtopicDetails/SubtopicDetails";
 
 const store = configureStore({
   reducer: {
@@ -81,6 +85,39 @@ function App() {
             element={
               <CMSHome>
                 <Marketing />
+              </CMSHome>
+            }
+          />
+             <Route
+            path="/cms/learning"
+            element={
+              <CMSHome>
+                <LearningLand />
+              </CMSHome>
+            }
+          />
+              <Route
+            path="/cms/learning/learning-details/:id"
+            element={
+              <CMSHome>
+                <LearningDetails />
+              </CMSHome>
+            }
+          />
+
+<Route
+            path="/cms/learning/learning-details/:id/:id"
+            element={
+              <CMSHome>
+                <TopicDetails />
+              </CMSHome>
+            }
+          />
+          <Route
+            path="/cms/learning/learning-details/:id/:id/:id"
+            element={
+              <CMSHome>
+                <SubtopicDetails />
               </CMSHome>
             }
           />

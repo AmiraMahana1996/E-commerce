@@ -1,14 +1,32 @@
-import { Button, DialogContent, DialogTitle, Dropdown, FormControl, FormLabel, Input, MenuButton, Modal, ModalDialog, Stack } from '@mui/joy'
+import { Button, Card, CardContent, DialogContent, DialogTitle, Dropdown, FormControl, FormLabel, Input, MenuButton, Modal, ModalDialog, Stack, Typography } from '@mui/joy'
 import axios from 'axios';
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 
 export default function MarketingPlan() {
     const [open, setOpen] = React.useState({ status: false, levelid: "" });
-
+    const [data, setData] = useState([]);
     const [formData, setFormData] = useState({
         title: "",
 
     });
+
+
+      // GET Request - Fetch all Products
+  const fetchProducts = async () => {
+    try {
+      const response = await axios.get(
+        `http://localhost:5000/api/marketing/all`
+      );
+      setData(response.data);
+      console.log(response.data, "linkedin");
+      // setGramatik(filteredlessons[0].gramatik);
+    } catch (err) {}
+  };
+
+  // Load posts when component mounts
+  useEffect(() => {
+    fetchProducts();
+  }, []);
   
     const handelChange = (e) => {
       const fieldName = e.target.name;
@@ -58,8 +76,21 @@ export default function MarketingPlan() {
       Add MarketingPlan
     </MenuButton>
   </Dropdown>
+  <br/>
+  <br/>
 
-
+  {data?.map((item) => (
+          <>
+            <Card variant="soft">
+              <CardContent>
+                <Typography color="warning" level="h4">
+                  Type: {item.title}
+                </Typography>
+         
+              </CardContent>
+            </Card>
+          </>
+        ))}
 
   <Modal open={open.status} onClose={() => setOpen({ status: false })}>
     <ModalDialog>

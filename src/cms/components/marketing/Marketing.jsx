@@ -1,7 +1,7 @@
 import { Home, Settings } from "@mui/icons-material";
 import { Card, Tab, TabList, TabPanel, Tabs, Typography } from "@mui/joy";
 import React from "react";
-import Linkedin from "../Social/Linkedin/Linkedin";
+import SocialCom from "../Social/Linkedin/Linkedin";
 import MarketingPlan from "../Social/marketingplan/marketingplan/MarketingPlan";
 
 export default function Marketing() {
@@ -45,35 +45,42 @@ export default function Marketing() {
           <TabPanel value={0}>
             <div className="p-4">
               <Typography>
-                <Linkedin />
+                <SocialCom api="addLinked" get="linkedin" />
               </Typography>
             </div>
           </TabPanel>
           <TabPanel value={1}>
             <div className="p-4">
-              <Typography>00</Typography>
+              <Typography>
+                <SocialCom api="addFacebook" get="facebook" />
+              </Typography>
             </div>
           </TabPanel>
           <TabPanel value={2}>
             <div className="p-4">
-              <Typography>ss</Typography>
+              <Typography>
+                <SocialCom api="addTiktok" get="tiktok" />
+              </Typography>
             </div>
           </TabPanel>
           <TabPanel value={3}>
             <div className="p-4">
-              <Typography>ss</Typography>
+              <Typography>
+                <SocialCom api="addinstgram" get="instgram" />
+              </Typography>
             </div>
           </TabPanel>
           <TabPanel value={4}>
             <div className="p-4">
-              <Typography>ss</Typography>
+              <Typography>
+                <SocialCom api="addyoutube" get="youtube" />
+              </Typography>
             </div>
           </TabPanel>
           <TabPanel value={5}>
             <div className="p-4">
               <Typography>
-<MarketingPlan/>
-
+                <MarketingPlan />
               </Typography>
             </div>
           </TabPanel>
