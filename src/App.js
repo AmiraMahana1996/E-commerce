@@ -22,6 +22,7 @@ import TopicDetails from "./cms/components/learning/topicDetails/TopicDetails";
 import SubtopicDetails from "./cms/components/learning/subtopicDetails/SubtopicDetails";
 import QuizWords from "./cms/components/WordsCom/QuizWords";
 import QuizGramatik from "./cms/components/WordsCom/QuizeGramatik";
+import Health from "./cms/components/Health/Health";
 
 const store = configureStore({
   reducer: {
@@ -132,11 +133,19 @@ function App() {
               </CMSHome>
             }
           />
-                 <Route
+          <Route
             path="/cms/learning/grammer-quiz/:id/:id/:id"
             element={
               <CMSHome>
                 <QuizGramatik />
+              </CMSHome>
+            }
+          />
+          <Route
+            path="/cms/health"
+            element={
+              <CMSHome>
+                <Health />
               </CMSHome>
             }
           />

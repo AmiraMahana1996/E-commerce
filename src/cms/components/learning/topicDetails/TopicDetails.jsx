@@ -7,6 +7,7 @@ export default function TopicDetails() {
   const [open, setOpen] = React.useState({ status: false, levelid: "" });
   const [formData, setFormData] = useState({
     title: "",
+    subtopicExpliant:""
   });
 
   const [data, setData] = useState([]);
@@ -53,6 +54,13 @@ const fetchProducts = async () => {
           title: value,
         }));
         break;
+
+        case "subtopicExpliant":
+          setFormData((prevFormData) => ({
+            ...prevFormData,
+            subtopicExpliant: value,
+          }));
+          break;
 
       default:
         // Handle other fields
@@ -109,12 +117,14 @@ const fetchProducts = async () => {
                 <Typography color="danger" level="h2">
                   {item.title}
                 </Typography>
-                <Typography color="primary">
-                  Topic: {item.durationToLearn}
+           
+                <Typography color="secandary">
+                  Explain: {item.subtopicExpliant}
                 </Typography>
                 <Switch checked={true} />
                 <br />
-                <br />
+
+          
 
                 <Button type="secondary">
                   <a href={`/cms/learning/learning-details/${path[4]}/${path[5]}/${item._id}`} className="continuebtn">
@@ -141,6 +151,17 @@ const fetchProducts = async () => {
                   value={formData.title}
                   autoFocus
                   placeholder="title"
+                />
+              </FormControl>
+              <FormControl>
+                <FormLabel>subtopicExpliant</FormLabel>
+                <Input
+                  name="subtopicExpliant"
+                  type="text"
+                  onChange={handelChange}
+                  value={formData.subtopicExpliant}
+                  autoFocus
+                  placeholder="subtopicExpliant"
                 />
               </FormControl>
 

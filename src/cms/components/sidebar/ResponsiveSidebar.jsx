@@ -57,8 +57,7 @@ const ResponsiveSidebar = () => {
     { text: 'Marketing', icon: <PeopleRoundedIcon /> ,link:"/cms/marketing"},
     { text: 'Learning Technical', icon: <PeopleRoundedIcon /> ,link:"/cms/learning"},
     { text: 'Health', icon: <PeopleRoundedIcon /> ,link:"/cms/health"},
-    { text: 'Medical', icon: <PeopleRoundedIcon /> ,link:"/cms/medical"},
-    { text: 'Other', icon: <PeopleRoundedIcon /> ,link:"/cms/marketing"},
+  
   ];
 
   const secondaryMenuItems = [
