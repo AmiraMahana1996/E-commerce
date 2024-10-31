@@ -20,6 +20,8 @@ import LearningLand from "./cms/components/learning/learningLand/LearningLand";
 import LearningDetails from "./cms/components/learning/learningDetails/LearningDetails";
 import TopicDetails from "./cms/components/learning/topicDetails/TopicDetails";
 import SubtopicDetails from "./cms/components/learning/subtopicDetails/SubtopicDetails";
+import QuizWords from "./cms/components/WordsCom/QuizWords";
+import QuizGramatik from "./cms/components/WordsCom/QuizeGramatik";
 
 const store = configureStore({
   reducer: {
@@ -88,7 +90,7 @@ function App() {
               </CMSHome>
             }
           />
-             <Route
+          <Route
             path="/cms/learning"
             element={
               <CMSHome>
@@ -96,7 +98,7 @@ function App() {
               </CMSHome>
             }
           />
-              <Route
+          <Route
             path="/cms/learning/learning-details/:id"
             element={
               <CMSHome>
@@ -105,7 +107,7 @@ function App() {
             }
           />
 
-<Route
+          <Route
             path="/cms/learning/learning-details/:id/:id"
             element={
               <CMSHome>
@@ -118,6 +120,23 @@ function App() {
             element={
               <CMSHome>
                 <SubtopicDetails />
+              </CMSHome>
+            }
+          />
+
+          <Route
+            path="/cms/learning/words-quiz/:id/:id/:id"
+            element={
+              <CMSHome>
+                <QuizWords />
+              </CMSHome>
+            }
+          />
+                 <Route
+            path="/cms/learning/grammer-quiz/:id/:id/:id"
+            element={
+              <CMSHome>
+                <QuizGramatik />
               </CMSHome>
             }
           />

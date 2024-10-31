@@ -35,12 +35,19 @@ import { Search, VolumeUp } from "@mui/icons-material";
 
 export default function WordsCom({ lessonid, levelidd, languageid }) {
   const [open, setOpen] = React.useState({ status: false, levelid: "" });
+  const [openQ, setOpenQ] = React.useState({ status: false, levelid: "" });
   const [data, setData] = useState([]);
   const [gramatik, setGramatik] = useState([]);
   const [formData, setFormData] = useState({
     word: "",
     translation: "",
     phrase: "",
+  });
+
+  const [formDataQ, setFormDataQ] = useState({
+    type: "",
+    question: "",
+    answer: "",
   });
 
   // GET Request - Fetch all Products
@@ -114,22 +121,88 @@ export default function WordsCom({ lessonid, levelidd, languageid }) {
     console.log(open, "oppen");
   };
 
+  const handelChangeQ = (e) => {
+    const fieldName = e.target.name;
+    const value = e.target.value;
+    switch (fieldName) {
+      case "type":
+        setFormDataQ((prevFormData) => ({
+          ...prevFormData,
+          type: value,
+        }));
+        break;
+      case "question":
+        setFormDataQ((prevFormData) => ({
+          ...prevFormData,
+          question: value,
+        }));
+        break;
+      case "answer":
+        setFormDataQ((prevFormData) => ({
+          ...prevFormData,
+          answer: value,
+        }));
+        break;
+      default:
+        // Handle other fields
+        break;
+    }
+  };
+
+  const handleSubmitQ = async (event) => {
+    event.preventDefault();
+    setOpenQ({ status: false });
+    console.log(formDataQ, "formData");
+    await axios.put(
+      `http://localhost:5000/api/language/addQeustionWords/${languageid}/${levelidd}/${lessonid}`,
+      formDataQ
+    );
+    console.log(open, "oppen");
+  };
+
   return (
     <>
       <Dropdown
         sx={{
           display: "flex",
-          justifyContent: "flex-end",
-          gap: 1,
+          justifyContent: "center",
+          gap: 2,
           mt: 2,
+          ml: 2,
         }}
       >
         <MenuButton
           variant="solid"
           color="primary"
+          sx={{
+            mr: 2,
+          }}
           onClick={() => setOpen({ status: true })}
         >
           Add Word
+        </MenuButton>
+
+        <MenuButton
+          variant="solid"
+          color="primary"
+          sx={{
+            mr: 2,
+          }}
+        >
+          <a
+            href={`/cms/learning/words-quiz/${languageid}/${levelidd}/${lessonid}`}
+            style={{ color: "#f7f0f0" ,textDecoration:"none"}}
+          >
+            Start Quiz
+          </a>
+        </MenuButton>
+
+        <MenuButton
+          variant="solid"
+          color="primary"
+          onClick={() => setOpenQ({ status: true })}
+        >
+          Add Question
         </MenuButton>
       </Dropdown>
 
@@ -249,6 +322,54 @@ export default function WordsCom({ lessonid, levelidd, languageid }) {
                   value={formData.phrase}
                   autoFocus
                   placeholder="Phrase"
+                />
+              </FormControl>
+
+              <Button type="submit">Submit</Button>
+            </Stack>
+          </form>
+        </ModalDialog>
+      </Modal>
+
+      <Modal open={openQ.status} onClose={() => setOpenQ({ status: false })}>
+        <ModalDialog>
+          <DialogTitle>Add new Question</DialogTitle>
+          <DialogContent>Fill in the information of the Word.</DialogContent>
+          <form onSubmit={handleSubmitQ}>
+            <Stack spacing={2}>
+              <FormControl>
+                <FormLabel>Type</FormLabel>
+                <Input
+                  name="type"
+                  type="text"
+                  onChange={handelChangeQ}
+                  value={formDataQ.type}
+                  autoFocus
+                  placeholder="type"
+                />
+              </FormControl>
+
+              <FormControl>
+                <FormLabel>question</FormLabel>
+                <Input
+                  name="question"
+                  type="text"
+                  onChange={handelChangeQ}
+                  value={formDataQ.question}
+                  autoFocus
+                  placeholder="question"
+                />
+              </FormControl>
+
+              <FormControl>
+                <FormLabel>answer</FormLabel>
+                <Input
+                  name="answer"
+                  type="text"
+                  onChange={handelChangeQ}
+                  value={formDataQ.answer}
+                  autoFocus
+                  placeholder="answer"
                 />
               </FormControl>
 
