@@ -235,6 +235,8 @@ export default function SocialCom({ api, get }) {
                   placeholder="idia"
                 />
               </FormControl>
+
+
               <FormControl>
                 <FormLabel>period</FormLabel>
                 <Input
@@ -246,6 +248,7 @@ export default function SocialCom({ api, get }) {
                   placeholder="period"
                 />
               </FormControl>
+              
               <FormControl>
                 <FormLabel>timeToPost</FormLabel>
                 <Input

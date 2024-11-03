@@ -1,6 +1,4 @@
-import logo from "./logo.svg";
 import "./App.css";
-import Button from "@mui/joy/Button";
 import { Provider } from "react-redux";
 import { configureStore } from "@reduxjs/toolkit";
 import HomeCom from "./pages/home/Home";
@@ -124,7 +122,6 @@ function App() {
               </CMSHome>
             }
           />
-
           <Route
             path="/cms/learning/words-quiz/:id/:id/:id"
             element={
