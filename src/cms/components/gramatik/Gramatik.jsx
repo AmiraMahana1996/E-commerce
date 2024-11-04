@@ -257,6 +257,10 @@ export default function Gramatik({ lessonid, levelidd, languageid }) {
                   <Typography level="body-md">
                     {grammarItem.explaination}
                   </Typography>
+
+                  <Typography level="body-md">
+                    {grammarItem.explaination2}
+                  </Typography>
                   <Typography
                     level="body-md"
                     sx={{ color: "text.secondary", mt: 1 }}

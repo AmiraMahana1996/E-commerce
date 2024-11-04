@@ -66,7 +66,7 @@ console.log(filteredlevel,"+++++++")
           sx={{ flexGrow: 1 }}
         >
           {data?.lessons?.map((item, index) => (
-            <Card sx={{ maxWidth: 345 }}>
+            <Card sx={{ maxWidth: 345 ,mr:"10px"}}>
               <CardMedia
                 sx={{ height: 140 }}
                 image="/deutsch.jpg"

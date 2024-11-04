@@ -57,10 +57,10 @@ export default function QuizWords() {
     console.log(
       wordItem,
       id,
-      e.target.value === wordItem.answer && id === wordItem.id
+      e.target.value.toLowerCase() === wordItem.answer.toLowerCase() && id === wordItem.id
     );
 
-    if (e.target.value === wordItem.answer && id === wordItem._id) {
+    if (e.target.value.toLowerCase() === wordItem.answer.toLowerCase() && id === wordItem._id) {
       setanswerTrue({ id: id, answer: true });
       setScore(score + 1);
     } else {
@@ -103,7 +103,7 @@ export default function QuizWords() {
                 borderColor: "success",
               }}
             >
-              <Typography level="h4" sx={{ color: "text.secondary" }}>
+              <Typography level="h6" color="primary">
                 {wordItem.type}
               </Typography>
               <Typography level="body-md" sx={{ color: "text.secondary" }}>
